@@ -1,5 +1,33 @@
-controllers:
-    resource:
-        path: ../src/Controller/
-        namespace: App\Controller
-    type: attribute
+auth:
+  resource: 'App\Controller\SecurityController'
+app:
+  resource: 'App\Controller\SecurityController'
+  type: annotation
+app.swagger:
+  path: /api/doc.json
+  methods: GET
+  defaults: { _controller: nelmio_api_doc.controller.swagger }
+
+reviews_controller:
+  path: /api/reviews/create
+  methods: ['POST']
+  defaults:
+    _controller: App\Controller\ApiPlatform\ReviewsController::create
+    _api_resource_class: App\Entity\Reviews
+    _api_operation_name: create_reviews
+
+carsCollection:
+  path: /api/cars
+  methods: ['GET']
+  defaults:
+    _controller: App\Controller\ApiPlatform\CarController::carsCollection
+    _api_resource_class: App\Entity\Car
+    _api_operation_name: cars_collection
+
+deletecar:
+  path: /api/car/delete/{id}
+  methods: ['DELETE']
+  defaults:
+    _controller: App\Controller\ApiPlatform\CarController::delete
+    _api_resource_class: App\Entity\Car
+    _api_operation_name: car_delete
