@@ -59,7 +59,41 @@ To run this application, you need to have Docker and Docker Compose installed on
 
 ##Usage
 You can access the API documentation at http://localhost/docs. You can also use tools like Postman or curl to test the endpoints.
-<p>Here are some examples of requests and responses:</p>
+
+##Authentication
+To use the API endpoints, you need to have a valid token. To get a token, you need to register a user and then authenticate with the user credentials.
+###1:Register a user
+To register a user, you need to send a POST request to <code>/api/user/register</code> with the following JSON body:
+<pre>
+{
+  "email": "user@example.com",
+  "plainPassword": "123"
+}
+</pre>
+The response will be a JSON object with the user id and email.
+
+###1-2:Authenticate a user
+To authenticate a user, you need to send a POST request to <code>https://localhost:8000/auth</code> with the following JSON body:
+<pre>
+{
+  "email": "user@example.com",
+  "password": "string"
+}
+</pre>
+The response will be a JSON object with the token and its expiration time.
+
+###1-3: Use the token
+
+<p align="center"><img src="./public/images/api-platform2.jpg" alt="API Platform"></p>
+
+To use the token, you need to add it as a Bearer token in the Authorization header of your requests. For example, if you want to use Postman, you can do the following:
+<ul>
+<li>In the Authorization tab, select Bearer Token as the type.</li>
+<li>Paste the token in the Token field.</li>
+<li>Send your request to the desired endpoint.</li>
+</ul>
+
+###Here are some examples of requests and responses:
 <code>curl http://localhost/api/cars</code>
 <pre>
 [
